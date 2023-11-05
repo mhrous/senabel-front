@@ -3,18 +3,20 @@ import CategoryDetails from '../../components/CategoryDetails';
 import Loading from '../../components/Loading';
 import { useContext, useEffect, useState } from 'react';
 import StoreContext from '../../context/StoreContext';
+import { useParams } from 'next/navigation'
 
+const ProductPage = () => {
+  const params = useParams()
 
-const ProductPage = ({ id }) => {
   const [category,setCategory]= useState({})
   const { store } = useContext(StoreContext);
 
   useEffect(()=>{
     if(!store) return;
-    const selectCategory= store.allCategory.find(item=>item.id===id)
+    const selectCategory= store.allCategory.find(item=>item.id===params.id)
     setCategory(selectCategory)
 
-  },[id,store])
+  },[params,store])
  return (
     <Loading>
       <div className='bg-primary-black overflow-hidden'>
@@ -26,11 +28,6 @@ const ProductPage = ({ id }) => {
       </div>
     </Loading>
   );
-}
-
-export async function getServerSideProps({ params }) {
-
-  return { props: { id:params.id} };
 }
 
 

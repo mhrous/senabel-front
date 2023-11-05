@@ -64,10 +64,6 @@ const CartPage = () => {
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${companyPhoneNumber}&text=${encodedMessage}`;
-    console.log({
-      companyPhoneNumber,
-      message
-    })
 
     await addNewOrder({notes,phoneNumber,total:+totalPrice,products:message})
 

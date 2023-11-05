@@ -6,7 +6,6 @@ import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import CartContext from '../context/CartContext';
 
 const ProductItem = ({ product, initialQuantity }) => {
-  console.log(product)
   const [quantity, setQuantity] = useState(initialQuantity || 0);
   const { cart, addCartItem, removeCartItem } = useContext(CartContext);
   const [expanded, setExpanded] = useState(initialQuantity > 0);

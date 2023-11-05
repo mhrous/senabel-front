@@ -5,17 +5,20 @@ import { FoodInsights } from '../../sections';
 import React, { useContext } from 'react';
 import Loading from '../../components/Loading';
 import StoreContext from '../../context/StoreContext';
+import { useParams } from 'next/navigation';
 
-const SectionPage = ({ id }) => {
+const SectionPage = () => {
+  const params = useParams()
+
   const [section,setSection]= useState({})
   const { store } = useContext(StoreContext);
 
   useEffect(()=>{
     if(!store) return;
-    const selectSection = store.allSections.find(item=>item.id===id)
+    const selectSection = store.allSections.find(item=>item.id===params.id)
     setSection(selectSection)
 
-  },[id,store])
+  },[params,store])
 
   return (
     <Loading>
@@ -32,8 +35,5 @@ const SectionPage = ({ id }) => {
 };
 
 
-export async function getServerSideProps({ params }) {
-  return { props: { id:params.id } };
-}
 
 export default SectionPage;
